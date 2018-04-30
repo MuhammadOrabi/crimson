@@ -22,7 +22,7 @@ Route::namespace('Web')->group(function () {
     Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('/sites/create/{template}', 'SitesController@create')->name('sites.create');
         Route::resource('sites', 'SitesController')->except('create');
-        Route::get('/{domain}', 'DashboardController@index')->name('index');
+        Route::get('/{domain?}', 'DashboardController@index')->name('index');
     });
 });
 

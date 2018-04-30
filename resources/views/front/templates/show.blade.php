@@ -9,8 +9,8 @@
 
                 <div class="card-body">
                     <article>
-                        <div class="body">{{ @$template->tags->first()->tag }}</div>
-                        <a href="{{ '/sites/create/' . $template->id }}">{{ __('Use this template!') }}</a>    
+                        <div class="body">{{ $template->tags->first()->tag }}</div>
+                        <a href="{{ $template->createPath() }}">{{ __('Use this template!') }}</a>    
                     </article>
                 </div>
             </div>

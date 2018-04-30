@@ -15,7 +15,7 @@ class TagSeeder extends Seeder
     {
         Tag::create(['tag' => 'website', 'type' => 'category']);
         Tag::create(['tag' => 'portfolio', 'type' => 'category']);
-        Tag::create(['tag' => 'web-application', 'type' => 'category']);
+        Tag::create(['tag' => 'web application', 'type' => 'category']);
         Tag::create(['tag' => 'blog', 'type' => 'category']);
     }
 }

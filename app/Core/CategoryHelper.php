@@ -2,7 +2,7 @@
 
 namespace App\Core\Templates;
 
-class TemplatesHelper
+class CategoryHelper
 {
     /**
      * Construct the name of the template class

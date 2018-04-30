@@ -38,4 +38,8 @@ class Template extends Model
     {
         return '/templates/' . $this->id;
     }
+
+    public function createPath() {
+        return '/dashboard/sites/create/' . $this->id;
+    }
 }
