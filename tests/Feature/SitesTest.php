@@ -14,6 +14,7 @@ class SitesTest extends TestCase
 {
     public $faker;
     public $user;
+    public $site;
 
     public function setUp() 
     {
@@ -21,33 +22,28 @@ class SitesTest extends TestCase
         $this->faker = Faker::create();
         $this->user = factory('App\User')->create();
         $this->actingAs($this->user); 
+        $this->site = factory('App\Site')->create(['user_id' => $this->user->id]);        
     }
 
     /** @test */
     public function it_can_be_created_by_a_user()
     {
-        $template = Template::where('name', 'bizlight')->first();
-        $collection = [
-            'template_id' => $template->id,
-            'domain' => $this->faker->domainWord
-        ];
-        $response = $this->post('/dashboard/sites', $collection);
-        $this->assertDatabaseHas('sites', $collection);
+        $site = factory('App\Site')->make(['user_id' => $this->user->id]);        
+        $response = $this->post('/dashboard/sites', $site->toArray());
+        $this->assertDatabaseHas('sites', $site->toArray());
     }
     
     /** @test */
     public function it_has_home_page()
     {
-        $site = $this->user->sites->sortByDesc('id')->first();
-        $pages = $site->pages->where('homePage', true)->toArray();
+        $pages = $this->site->pages->where('homePage', true)->toArray();
         $this->assertCount(1, $pages);
     }
 
     /** @test */
     public function user_can_visit_home_page()
     {
-        $site = $this->user->sites->sortByDesc('id')->first();
-        $page = $site->pages->where('homePage', true)->first();
+        $page = $this->site->pages->where('homePage', true)->first();
         $this->get($page->path())
              ->assertStatus(200);
     }

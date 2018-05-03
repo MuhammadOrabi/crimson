@@ -41,6 +41,9 @@ class SitesController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$request->has('name')) {
+            $request->request->add(['name' => kebab_case(request('domain'))]);
+        }
         $site = SiteHelper::create(auth()->user(), $request->all());
         return redirect($site->dashboardPath());
     }

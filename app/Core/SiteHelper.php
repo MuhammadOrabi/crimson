@@ -19,10 +19,10 @@ class SiteHelper
 
         $site = $user->sites()->create([
             'template_id' => $data['template_id'],
-            'domain' => $data['domain']
+            'domain' => $data['domain'],
+            'name' => $data['name']
         ]);
 
-        CategoryHelper::direct('scaffold', $site);
         return $site;
     }
 

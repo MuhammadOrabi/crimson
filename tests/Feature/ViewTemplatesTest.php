@@ -30,24 +30,23 @@ class ViewTemplatesTest extends TestCase
              ->assertSee($this->template->name)
              ->assertSee($this->template->tags->first()->tag);
     }
-    
-    /** @test */
+
+    /** @test */    
     public function a_user_can_view_single_template()
     {
         $this->get($this->template->path())
              ->assertSee($this->template->name);
     }
 
-    /** @test */
+    /** @test */    
     public function a_user_can_view_sites_that_are_associated_with_a_template()
     {
-        $collection = [
-            'template_id' => $this->template->id,
-            'domain' => $this->faker->domainWord
-        ];
-        $response = $this->post('/dashboard/sites', $collection);
-        $this->assertDatabaseHas('sites', $collection);
-        $this->get($this->template->path())
-             ->assertSee(camel_case($collection['domain']));
+        $response = $this->get($this->template->path());
+        $site = $this->template->sites()->first();
+        if ($site) {
+            $response->assertSee($site->name);
+        } else {
+            $response->assertSee($this->template->name);          
+        }
     }
 }
