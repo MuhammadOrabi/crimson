@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Site;
-use Illuminate\Http\Request;
-use App\Template;
+use App\Core;
+use App\Core\SiteHelper\SiteHelper;
 use App\Http\Controllers\Controller;
+use App\Site;
+use App\Template;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
 
 class SitesController extends Controller
 {
@@ -38,18 +41,7 @@ class SitesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'domain' => 'required|unique:sites',
-            'template_id' => 'required|exists:templates,id'
-        ]);
-
-        $template = Template::findOrFail($request->template_id);
-        $site = $template->sites()->create([
-            'domain' => $request->domain,
-            'name' => camel_case($request->domain),
-            'user_id' => auth()->id()
-        ]);
-        
+        $site = SiteHelper::create(auth()->user(), $request->all());
         return redirect($site->dashboardPath());
     }
 
