@@ -20,6 +20,6 @@ class Page extends Model
 
     public function path()
     {
-        return $this->site->publicPath . '/' . $this->slug;
+        return $this->site->publicPath() . '/' . $this->slug;
     }
 }

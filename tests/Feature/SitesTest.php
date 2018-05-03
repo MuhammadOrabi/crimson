@@ -14,7 +14,6 @@ class SitesTest extends TestCase
 {
     public $faker;
     public $user;
-    public static $site;
 
     public function setUp() 
     {
@@ -32,22 +31,23 @@ class SitesTest extends TestCase
             'template_id' => $template->id,
             'domain' => $this->faker->domainWord
         ];
-        $response = $this->post('/dashboard/site/store', $collection);
+        $response = $this->post('/dashboard/sites', $collection);
         $this->assertDatabaseHas('sites', $collection);
-        self::$site = $this->user->sites->sortByDesc('id')->first();
     }
-
+    
     /** @test */
     public function it_has_home_page()
     {
-        $pages = self::$site->pages->where('homePage', true)->toArray();
+        $site = $this->user->sites->sortByDesc('id')->first();
+        $pages = $site->pages->where('homePage', true)->toArray();
         $this->assertCount(1, $pages);
     }
 
     /** @test */
     public function user_can_visit_home_page()
     {
-        $page = $this->site->pages->where('homePage', true)->first();
+        $site = $this->user->sites->sortByDesc('id')->first();
+        $page = $site->pages->where('homePage', true)->first();
         $this->get($page->path())
              ->assertStatus(200);
     }

@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Site;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index($domain)
     {
-        return view('dashboard.index');
+        $site = auth()->user()->sites()->where('domain', $domain)->firstOrFail();
+        return view('dash1board.index', compact('site'));
     }
 }
