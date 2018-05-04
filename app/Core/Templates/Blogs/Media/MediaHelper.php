@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Templates\Websites\Bizlight;
+namespace App\Core\Templates\Blogs\Media;
 
 use App\Core\TemplateHelper;
 
-class BizlightHelper extends TemplateHelper
+class MediaHelper extends TemplateHelper
 {
     public static function scaffold($site)
     {

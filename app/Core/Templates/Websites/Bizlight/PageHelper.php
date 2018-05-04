@@ -2,9 +2,7 @@
 
 namespace App\Core\Templates\Websites\Bizlight;
 
-use App\Core\Templates\TemplateItemInterface;
-
-class PageHelper implements TemplateItemInterface
+class pagehelper
 {
     public static function get($site, $page, $data, $component)
     {
