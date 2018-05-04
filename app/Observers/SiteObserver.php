@@ -3,9 +3,9 @@
 namespace App\Observers;
 
 use App\Site;
-use App\Core\Templates\CategoryHelper;
+use App\Core\CategoryHelper;
 
-class SiteObserver  
+class SiteObserver
 {
     public function created(Site $site)
     {

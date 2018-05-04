@@ -2,7 +2,7 @@
 
 namespace App\Core\Templates\Websites\Bizlight;
 
-use App\Core\Templates\TemplateInterface;
+use App\Core\TemplateInterface;
 
 class BizlightHelper implements TemplateInterface
 {
@@ -29,5 +29,4 @@ class BizlightHelper implements TemplateInterface
             'slug' => ''
         ]);
     }
-    
 }

@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Core\Templates;
-use App\Core\Templates\Websites\Bizlight\BizlightHelper;
+namespace App\Core;
 
 class CategoryHelper
 {

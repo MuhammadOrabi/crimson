@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Templates;
+namespace App\Core;
 
 interface TemplateItemInterface
 {
