@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Core;
-use App\Core\SiteHelper\SiteHelper;
+use App\Core\SiteHelper;
 use App\Http\Controllers\Controller;
 use App\Site;
 use App\Template;

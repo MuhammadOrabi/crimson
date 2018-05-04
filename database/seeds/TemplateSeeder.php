@@ -18,7 +18,7 @@ class TemplateSeeder extends Seeder
         );
         $tag_portfolio = Tag::where('tag', 'portfolio')->firstOrFail();
         $tag_portfolio->templates()->create(
-            ['name' => 'template1', 'type' => 'portfolio']
+            ['name' => 'portfolio1', 'type' => 'portfolio']
         );
         $tag_webApp = Tag::where('tag', 'web application')->firstOrFail();
         $tag_webApp->templates()->create(
@@ -27,7 +27,7 @@ class TemplateSeeder extends Seeder
 
         $tag_blog = Tag::where('tag', 'blog')->firstOrFail();
         $tag_blog->templates()->create(
-            ['name' => 'template1', 'type' => 'blog']
+            ['name' => 'media', 'type' => 'blog']
         );
     }
 }

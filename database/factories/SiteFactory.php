@@ -10,7 +10,7 @@ $factory->define(App\Site::class, function (Faker $faker) {
         'user_id' => function () {
             return factory('App\User')->create()->id;
         },
-        // 'template_id' => App\Template::all('id')->random(1)->first()->id
-        'template_id' => App\Template::whereName('bizlight')->first()->id
+        'template_id' => App\Template::all('id')->random(1)->first()->id
+        // 'template_id' => App\Template::whereIn('name', ['bizlight', 'elearning'])->first()->id
     ];
 });

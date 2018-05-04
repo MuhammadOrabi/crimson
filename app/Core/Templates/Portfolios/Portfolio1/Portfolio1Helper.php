@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Templates\Websites\Bizlight;
+namespace App\Core\Templates\Portfolios\Portfolio1;
 
 use App\Core\TemplateHelper;
 
-class BizlightHelper extends TemplateHelper
+class Portfolio1Helper extends TemplateHelper
 {
     public static function scaffold($site)
     {

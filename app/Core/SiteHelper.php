@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Core\SiteHelper;
+namespace App\Core;
 
-use App\Core\Templates\CategoryHelper;
+use App\Core\CategoryHelper;
 use App\Template;
 use Validator;
 
 class SiteHelper
 {
-    public static function create($user, $data) 
+    public static function create($user, $data)
     {
         $validator = self::validate($data);
         if ($validator->fails()) {
@@ -26,7 +26,7 @@ class SiteHelper
         return $site;
     }
 
-    public static function validate($data) 
+    public static function validate($data)
     {
         return Validator::make($data, [
             'domain' => 'required|unique:sites',

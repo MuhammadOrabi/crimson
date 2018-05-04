@@ -27,18 +27,17 @@ class ViewTemplatesTest extends TestCase
     public function a_user_can_view_all_templates()
     {
         $this->get('/templates')
-             ->assertSee($this->template->name)
-             ->assertSee($this->template->tags->first()->tag);
+             ->assertSee($this->template->name);
     }
 
-    /** @test */    
+    /** @test */
     public function a_user_can_view_single_template()
     {
         $this->get($this->template->path())
              ->assertSee($this->template->name);
     }
 
-    /** @test */    
+    /** @test */
     public function a_user_can_view_sites_that_are_associated_with_a_template()
     {
         $response = $this->get($this->template->path());
@@ -46,7 +45,7 @@ class ViewTemplatesTest extends TestCase
         if ($site) {
             $response->assertSee($site->name);
         } else {
-            $response->assertSee($this->template->name);          
+            $response->assertSee($this->template->name);
         }
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Core\Templates\Websites\Bizlight;
+
+namespace App\Core\Templates\WebApplications\ELearning;
 
 use App\Core\TemplateHelper;
 
-class BizlightHelper extends TemplateHelper
+class ELearningHelper extends TemplateHelper
 {
     public static function scaffold($site)
     {
