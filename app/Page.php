@@ -22,4 +22,13 @@ class Page extends Model
     {
         return $this->site->publicPath() . '/' . $this->slug;
     }
+    public function dashboard($op)
+    {
+        return $this->site->template->dashboard() . '.' . $this->page->title . '.' . $op;
+    }
+
+    public function front($op)
+    {
+        return $this->site->template->front() . '.' . $this->page->title . '.' . $op;
+    }
 }

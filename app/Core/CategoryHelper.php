@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Core\Templates;
-use App\Core\Templates\Websites\Bizlight\BizlightHelper;
+namespace App\Core;
 
 class CategoryHelper
 {
@@ -15,7 +14,9 @@ class CategoryHelper
         $tag = ucwords(camel_Case($site->template->category()->tag)) . 's';
         
         $Helper = "Helper";
+
         $templateHelper = "\App\Core\Templates\\$tag\\$templatePath\\$templatePath$Helper";
+        
         return ($templateHelper)::do($op, $site, $page, $data, $component);
     }
 }
