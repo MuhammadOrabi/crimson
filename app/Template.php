@@ -42,4 +42,14 @@ class Template extends Model
     public function createPath() {
         return '/dashboard/sites/create/' . $this->id;
     }
+
+    public function dashboard()
+    {
+        return 'templates.' . $this->category()->tag . '.dashboard';
+    }
+
+    public function front()
+    {
+        return 'templates.' . $this->category()->tag . '.front';
+    }
 }
