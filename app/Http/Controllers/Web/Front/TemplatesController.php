@@ -1,18 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Web\Front;
 
-use App\Core;
-use App\Core\SiteHelper;
-use App\Http\Controllers\Controller;
-use App\Site;
 use App\Template;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
+use App\Http\Controllers\Controller;
 
-class SitesController extends Controller
+class TemplatesController extends Controller
 {
- 
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +15,8 @@ class SitesController extends Controller
      */
     public function index()
     {
-        //
+        $templates = Template::with('tags')->latest()->get();
+        return view('front.templates.index', compact('templates'));
     }
 
     /**
@@ -28,9 +24,9 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Template $template)
+    public function create()
     {
-        return view('dashboard.sites.create', compact('template'));
+        //
     }
 
     /**
@@ -41,31 +37,27 @@ class SitesController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->has('name')) {
-            $request->request->add(['name' => kebab_case(request('domain'))]);
-        }
-        $site = SiteHelper::create(auth()->user(), $request->all());
-        return redirect($site->dashboardPath());
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Site  $site
+     * @param  \App\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function show(Site $site)
+    public function show(Template $template)
     {
-        //
+        return view('front.templates.show', compact('template'));        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Site  $site
+     * @param  \App\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function edit(Site $site)
+    public function edit(Template $template)
     {
         //
     }
@@ -74,10 +66,10 @@ class SitesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Site  $site
+     * @param  \App\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Site $site)
+    public function update(Request $request, Template $template)
     {
         //
     }
@@ -85,10 +77,10 @@ class SitesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Site  $site
+     * @param  \App\Template  $template
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Site $site)
+    public function destroy(Template $template)
     {
         //
     }
