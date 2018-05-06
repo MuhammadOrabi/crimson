@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Templates\Bizlight;
+namespace Tests\Feature\Templates\Websites\Bizlight;
 
 use App\Template;
 use Illuminate\Foundation\Testing\RefreshDatabase;

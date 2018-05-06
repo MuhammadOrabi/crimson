@@ -36,14 +36,12 @@ Route::namespace('Front')->group(function () {
     Route::resource('templates', 'TemplatesController');
 });
 
-
-Route::prefix('{domain}')->group(function () {
-    Route::get('/{slug?}', function () {
-        $slug = request()->slug ? request()->slug : ''; 
-        $site = \App\Site::where('domain', request()->domain)->firstOrFail();
-        return $site->pages()->whereActive(true)->whereSlug($slug)->firstOrFail();
+Route::namespace('Site')->group(function () {
+    Route::prefix('{domain}')->group(function () {
+        Route::get('/{slug?}', 'SiteController@handle');
     });
 });
+
 // Route::domain('{domain}.' . env('APP_URL'))->group(function () {
 //     Route::get('/{slug?}/{id?}', function () {
 //         return view('front.welcome');

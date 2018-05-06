@@ -9,6 +9,6 @@ class SiteObserver
 {
     public function created(Site $site)
     {
-        CategoryHelper::direct('scaffold', $site);
+        CategoryHelper::handle('scaffold', $site);
     }
 }

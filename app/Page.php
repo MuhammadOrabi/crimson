@@ -24,11 +24,13 @@ class Page extends Model
     }
     public function dashboard($op)
     {
-        return $this->site->template->dashboard() . '.' . $this->page->title . '.' . $op;
+        $slug = $this->slug ? $this->slug : 'index'; 
+        return $this->site->template->dashboard() . '.' . $slug . '.' . $op;
     }
 
     public function front($op)
     {
-        return $this->site->template->front() . '.' . $this->page->title . '.' . $op;
+        $slug = $this->slug ? $this->slug : 'index';        
+        return $this->site->template->front() . '.' . $slug . '.' . $op;
     }
 }
