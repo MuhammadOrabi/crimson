@@ -4,16 +4,35 @@ namespace App\Core;
 
 class TemplateHelper
 {
-    public static function do($op, $site, $page, $data, $component)
+
+    /**
+     * Construct The Helper Class and the function
+     * ex:
+     *      op: scaffold
+     *      static::scaffold(---)
+     * ex:
+     *      op: dashboard-section-delete-auth, api-content-create-auth, front-page-view-guest, ...
+     *      folder -> dashboard, api, front, ....
+     *      class -> section, content, page, ....
+     *      function -> delete, create, view, ....
+     *      status -> auth, guest
+     */
+    public static function handle($path, $op, $site, $page, $data, $component)
     {
         if (str_contains($op, '-')) {
             $arr = explode('-', $op);
 
-            $class = ucfirst($arr[0]) . 'Helper';
+            $folder = ucfirst($arr[0]); 
+            
+            $class = ucfirst($arr[1]) . 'Helper';
 
-            $function = $arr[1];
+            $function = $arr[2];
 
-            return ($class)::$function($site, $page, $data, $component);
+            $status = $arr[3];
+
+            $fullClassPath = "$path\\$folder\\$class";
+
+            return ($fullClassPath)::$function($status, $site, $page, $data, $component);
         } else {
             static::$op($site);
         }
