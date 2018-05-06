@@ -40,15 +40,7 @@ class SitesTest extends TestCase
     }
 
     /** @test */
-    public function users_can_visit_home_page()
-    {
-        $page = $this->site->pages->where('homePage', true)->first();
-        $this->get($page->path())
-             ->assertStatus(200);
-    }
-
-    /** @test */
-    public function it_has_dashboard()
+    public function its_owner_can_access_dashboard()
     {
         $this->get($this->site->dashboardPath())
              ->assertStatus(200);
@@ -62,4 +54,24 @@ class SitesTest extends TestCase
         $this->get($this->site->dashboardPath())
              ->assertStatus(404);
     }
+
+    /** @test */
+    public function users_can_visit_the_active_pages()
+    {
+        $page = $this->site->pages->random(1)->first();
+        $page->update(['active' => true]);
+        $this->get($page->path())
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function users_cant_visit_the_deactivated_pages()
+    {
+        $page = $this->site->pages->random(1)->first();
+        $page->update(['active' => false]);
+        $this->get($page->path())
+            ->assertStatus(404);
+    }
+
+    
 }

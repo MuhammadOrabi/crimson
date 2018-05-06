@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers\Web\Dashboard;
 
 use App\Template;
 use Illuminate\Http\Request;
@@ -15,8 +15,7 @@ class TemplatesController extends Controller
      */
     public function index()
     {
-        $templates = Template::with('tags')->latest()->get();
-        return view('front.templates.index', compact('templates'));
+        // 
     }
 
     /**

@@ -10,25 +10,39 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::namespace('Web')->group(function () {
-    Route::get('/', function () {
-        return view('front.welcome');
-    });
-    
-    Auth::routes();
 
-    Route::resource('templates', 'TemplatesController');
-    
+Route::get('/', function () {
+    return view('front.welcome');
+});
+
+Auth::routes();
+
+Route::namespace('Dashboard')->group(function() {
     Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::get('/', function () {
+            return redirect()->route('dashboard.user.sites');
+        });
+
         Route::get('/sites/create/{template}', 'SitesController@create')->name('sites.create');
         Route::resource('sites', 'SitesController')->except('create');
+        
+        Route::get('/sites', 'DashboardController@sites')->name('user.sites');
         Route::get('/{domain}', 'DashboardController@index')->name('index');
         Route::get('/pages/{page}/{domain}', 'DashboardController@pages')->name('pages');
     });
 });
 
-Route::get('/{domain}/{slug?}/{id?}', function () {
-    return \App\Site::where('domain', request()->domain)->firstOrFail();
+Route::namespace('Front')->group(function () {
+    Route::resource('templates', 'TemplatesController');
+});
+
+
+Route::prefix('{domain}')->group(function () {
+    Route::get('/{slug?}', function () {
+        $slug = request()->slug ? request()->slug : ''; 
+        $site = \App\Site::where('domain', request()->domain)->firstOrFail();
+        return $site->pages()->whereActive(true)->whereSlug($slug)->firstOrFail();
+    });
 });
 // Route::domain('{domain}.' . env('APP_URL'))->group(function () {
 //     Route::get('/{slug?}/{id?}', function () {

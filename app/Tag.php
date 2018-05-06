@@ -17,4 +17,9 @@ class Tag extends Model
     {
         return $this->morphedByMany('App\Template', 'taggable');
     }
+
+    public function slug()
+    {
+        return str_slug($this->tag);
+    }
 }

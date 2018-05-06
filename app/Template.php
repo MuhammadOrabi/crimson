@@ -43,13 +43,13 @@ class Template extends Model
         return '/dashboard/sites/create/' . $this->id;
     }
 
-    public function dashboard()
+    public function dashboard($slug)
     {
-        return 'templates.' . $this->category()->tag . '.dashboard';
+        return 'templates.' . $this->category()->slug() . '.' . $this->template->name . '.dashboard.' . $slug;
     }
 
-    public function front()
+    public function front($slug)
     {
-        return 'templates.' . $this->category()->tag . '.front';
+        return 'templates.' . $this->category()->slug() . '.' . $this->template->name . '.front.' . $slug;
     }
 }
