@@ -18,19 +18,23 @@ class Page extends Model
         return $this->morphMany('App\Section', 'sectionable');
     }
 
-    public function path()
+    public function publicPath()
     {
         return $this->site->publicPath() . '/' . $this->slug;
     }
+
+    public function dashboardPath()
+    {
+        return '/dashboard/pages/' . $this->id . '/' . $this->site->domain;
+    }
+
     public function dashboard($op)
     {
-        $slug = $this->slug ? $this->slug : 'index'; 
-        return $this->site->template->dashboard() . '.' . $slug . '.' . $op;
+        return $this->site->template->dashboard() . '.pages.' . $op;
     }
 
     public function front($op)
     {
-        $slug = $this->slug ? $this->slug : 'index';        
         return $this->site->template->front() . '.pages.' . $op;
     }
 }

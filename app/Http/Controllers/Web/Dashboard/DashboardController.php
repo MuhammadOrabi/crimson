@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Site;
 use App\Page;
+use App\Core\CategoryHelper;
 
 class DashboardController extends Controller
 {
@@ -25,8 +26,13 @@ class DashboardController extends Controller
     public function pages(Page $page, $domain)
     {
         $site = auth()->user()->sites()->whereDomain($domain)->firstOrFail();
-        abort_if($site->id !== $page->site->id);
-        $slug = $page->slug ===  '' ? 'index' : $page->slug; 
-        return view($page->dashboard($slug));
+
+        abort_if($site->id !== $page->site->id, 404);
+
+        extract(
+            CategoryHelper::handle('dashboard-page-view-auth', $site, $page)
+        );
+
+        return view($view, $data);
     }
 }
