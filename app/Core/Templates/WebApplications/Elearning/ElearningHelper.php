@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Core\Templates\WebApplications\ELearning;
+namespace App\Core\Templates\WebApplications\Elearning;
 
 use App\Core\TemplateHelper;
 
-class ELearningHelper extends TemplateHelper
+class ElearningHelper extends TemplateHelper
 {
     public static function scaffold($site)
     {

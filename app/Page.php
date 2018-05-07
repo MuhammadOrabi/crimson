@@ -31,6 +31,6 @@ class Page extends Model
     public function front($op)
     {
         $slug = $this->slug ? $this->slug : 'index';        
-        return $this->site->template->front() . '.' . $slug . '.' . $op;
+        return $this->site->template->front() . '.pages.' . $op;
     }
 }
