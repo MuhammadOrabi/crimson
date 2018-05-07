@@ -59,9 +59,7 @@ class SitesTest extends TestCase
     public function users_can_visit_the_active_pages()
     {
         $page = $this->site->pages->random(1)->first();
-        $page->update(['active' => true]);
-        $this->get($page->path())
-            ->assertStatus(200);
+        $response = $this->get($page->path())->assertStatus(200);
     }
 
     /** @test */
@@ -70,7 +68,7 @@ class SitesTest extends TestCase
         $page = $this->site->pages->random(1)->first();
         $page->update(['active' => false]);
         $this->get($page->path())
-            ->assertStatus(404);
+             ->assertStatus(404);
     }
 
     

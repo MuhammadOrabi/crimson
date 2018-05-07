@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Templates\Websites\Bizlight\Front;
+namespace App\Core\Templates\Portfolios\Portfolio1\Front;
 
 use App\Core\FrontHelper;
 
