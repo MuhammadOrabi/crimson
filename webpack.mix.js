@@ -11,5 +11,15 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix.js('resources/assets/dashboard/js/app.js', 'public/dashboard/js')
+    .sass('resources/assets/dashboard/sass/app.scss', 'public/dashboard/css');
+
+mix.js('resources/assets/buefy/js/app.js', 'public/buefy/js')
+    .sass('resources/assets/buefy/sass/app.scss', 'public/buefy/css');
+
+let tailwindcss = require('tailwindcss');
+
+mix.sass('resources/assets/tailwindcss/sass/app.sass', 'public/tailwindcss').options({
+    processCssUrls: false,
+    postCss: [tailwindcss('resources/assets/tailwindcss/js/tailwind.js')],
+});
