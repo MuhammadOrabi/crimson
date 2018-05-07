@@ -59,7 +59,7 @@ class SitesTest extends TestCase
     public function users_can_visit_the_active_pages()
     {
         $page = $this->site->pages->random(1)->first();
-        $response = $this->get($page->path())->assertStatus(200);
+        $response = $this->get($page->publicPath())->assertStatus(200);
     }
 
     /** @test */
@@ -67,9 +67,25 @@ class SitesTest extends TestCase
     {
         $page = $this->site->pages->random(1)->first();
         $page->update(['active' => false]);
-        $this->get($page->path())
+        $this->get($page->publicPath())
              ->assertStatus(404);
     }
 
-    
+    /** @test */
+    public function owner_can_access_the_pages_dashboard()
+    {
+        $page = $this->site->pages->random(1)->first();
+        $this->get($page->dashboardPath())
+             ->assertStatus(200);     
+    }
+
+    /** @test */
+    public function other_users_cant_access_pages_dashboard()
+    {
+        $user = factory('App\User')->create();
+        $this->actingAs($user);
+        $page = $this->site->pages->random(1)->first();
+        $this->get($page->dashboardPath())
+            ->assertStatus(404);
+    }
 }
